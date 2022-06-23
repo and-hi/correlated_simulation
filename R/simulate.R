@@ -48,6 +48,7 @@ plot_ts <- function(ts){
 
 
 lognormDiscrete <- function(Dmax=20,logmu=0,sigma=0.5){
+  # From Surveillance package
   Fd <- plnorm(0:Dmax, meanlog = logmu, sdlog = sigma)
   FdDmax <- plnorm(Dmax, meanlog = logmu, sdlog = sigma)
   
