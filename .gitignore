@@ -1,0 +1,10 @@
+.Rhistory
+.Rapp.history
+.RData
+.RDataTmp
+.Ruserdata
+correlated_simulation.Rproj
+.Rproj.user/
+data/
+assets/
+output/
