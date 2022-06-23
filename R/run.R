@@ -171,3 +171,17 @@ ggplot(ts_comb, aes(x=t,y = cases)) +
   facet_wrap(vars(type), nrow = 3) +
   theme_Publication()
 ggsave("output/three_ts_with_outbreak.png", width = 14, height = 9)
+
+adjacency_matrix <- matrix(c(.9,.1,.1,0,.5,.5,0,.5,.5), nrow=3, ncol=3, byrow=TRUE)
+row.names(adjacency_matrix) <- colnames(adjacency_matrix) <-  c("ts_1", "ts_2", "ts_3")
+outbreak_ts <-
+  tibble(t = 1:624,
+         cases = c(rep(0, 100), 600, 300, rep(0, 100), 300, 400, rep(0, 420)),
+         source = "ts_2")
+
+multivariate_ts <- add_outbreak_to_multivariate_ts(ts_comb, adjacency_matrix, outbreak_ts)
+ggplot(multivariate_ts, aes(x=t,y = cases)) +
+  geom_line() +
+  facet_wrap(vars(type), nrow = 3) +
+  theme_Publication()
+ggsave("output/three_ts_with_outbreak_0.5.5.png", width = 14, height = 9)

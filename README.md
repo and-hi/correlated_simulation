@@ -10,8 +10,16 @@ When an outbreak occurs we can usually see signals in several closely related in
 
 It is difficult to reproduce Figure 2(d), Szenario 17.
 
-    Ich vermute, dass das daran liegt, dass die Parametrisierung der NegBinom-Verteiliung im Paper falsch ist. Dort ist mu der Erwartungswert und die Varianz ist ist gegeben durch mu*sigma, wobei sigma ein Dispersion Parameter ist. Normalerweise wird der Dispersionsparameter aber k genannt und die Varianz ist mu+mu^2/k (siehe z.B. die Hilfe für rnbinom in R). Ich vermute, dass das im Paper mit der quasi-Poissonverteilung verwechselt wurde. Siehe z.B. hier für eine passende Parametrisierung: https://en.wikipedia.org/wiki/Poisson_regression#Overdispersion_and_zero_inflation
+Ich vermute, dass das daran liegt, dass die Parametrisierung der NegBinom-Verteiliung im Paper falsch ist. Dort ist mu der Erwartungswert und die Varianz ist ist gegeben durch mu\*sigma, wobei sigma ein Dispersion Parameter ist. Normalerweise wird der Dispersionsparameter aber k genannt und die Varianz ist mu+mu\^2/k (siehe z.B. die Hilfe für rnbinom in R). Ich vermute, dass das im Paper mit der quasi-Poissonverteilung verwechselt wurde. Siehe z.B. hier für eine passende Parametrisierung: <https://en.wikipedia.org/wiki/Poisson_regression#Overdispersion_and_zero_inflation>
 
-    Wenn man mu*sigma = mu + mu^2/k nach k auflöst, bekommt man k = mu/(sigma-1). Wenn ich das benutze, bekomme ich auch das Szenario 17 viel passender zum Paper simuliert. Allerdings passen dann meiner Meinung nach die Szenarien 10 und 12, also b) und c) in Fig 2, nicht mehr. 
+Wenn man mu\*sigma = mu + mu\^2/k nach k auflöst, bekommt man k = mu/(sigma-1). Wenn ich das benutze, bekomme ich auch das Szenario 17 viel passender zum Paper simuliert. Allerdings passen dann meiner Meinung nach die Szenarien 10 und 12, also b) und c) in Fig 2, nicht mehr.
 
-    Ich weiß nicht, wie man in R von der quasi-Poisson Verteilung zieht und habe nur diesen einen halbseidenen blogpost gefunden, der meinen Vorschlag oben nutzt. https://www.r-bloggers.com/2012/08/generate-quasi-poisson-distribution-random-variable/ Hier ist es angeblich implementiert, aber die Formel ist falsch angegeben: https://rdrr.io/cran/predint/man/rqpois.html
+Ich weiß nicht, wie man in R von der quasi-Poisson Verteilung zieht und habe nur diesen einen halbseidenen blogpost gefunden, der meinen Vorschlag oben nutzt. <https://www.r-bloggers.com/2012/08/generate-quasi-poisson-distribution-random-variable/> Hier ist es angeblich implementiert, aber die Formel ist falsch angegeben: <https://rdrr.io/cran/predint/man/rqpois.html>
+
+### Possible ways to continue
+
+-   make the multivariate outbreaks depend on the variance of the endemic time series, as is the case for univariate
+
+-   include polymod adjacency matrix for age group interactions
+
+-   include different spatial adjacency matrices for Germany

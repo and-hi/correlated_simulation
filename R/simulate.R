@@ -45,7 +45,25 @@ plot_ts <- function(ts){
   return(p)
 }
 
-
+add_outbreak_to_multivariate_ts <- function(multivariate_ts, adjacency_matrix, outbreak_ts){
+  # multivariate_ts: data frame of time series in long format
+  # adjacency_matrix. describes the dependency structure between time series.
+  #   each [row] says what proportion of outbreak cases in [ts] to assign 
+  #   to itself (diagonal elements) or to other ts
+  # outbreak_ts: time series of outbreaks
+  proportions <- adjacency_matrix[unique(outbreak_ts$source),]
+  out <- list()
+  for (i in seq_along(proportions)) {
+    cases <- proportions[i]*outbreak_ts$cases
+    multivariate_ts[multivariate_ts$type == names(proportions)[[i]], "outbr_cases"] <- cases
+  }
+  multivariate_ts <- 
+    multivariate_ts %>%
+    mutate(endemic_cases = cases,
+           cases = endemic_cases+outbr_cases)
+  
+  return(multivariate_ts)
+}
 
 lognormDiscrete <- function(Dmax=20,logmu=0,sigma=0.5){
   # From Surveillance package
