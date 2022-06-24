@@ -10,7 +10,7 @@ See the file `R/run.R` for some examples. It contains:
 
 -   example simulations
 
--   Reproductions of some of the scenarios from the paper
+-   reproductions of some of the scenarios from the paper
 
 -   examples of an adjacency matrix and a multivariate outbreak simulation
 
