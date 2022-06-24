@@ -6,11 +6,17 @@ This R project simulates outbreaks into several time series, extending the simul
 
 When an outbreak occurs we can usually see signals in several closely related infection time series, i.e. neighbouring counties, similar ages. Noufaily 2012 only simulates independent time series. Here we simulate outbreaks in several adjacent time series. This will help us to develop new algorithms that can combine signals from several time series.
 
-See the run file for some example simulations and how to reproduce some of the scenarios from the paper.
+See the file `R/run.R` for some examples. It contains:
+
+-   example simulations
+
+-   Reproductions of some of the scenarios from the paper
+
+-   examples of an adjacency matrix and a multivariate outbreak simulation
 
 ### Comment the parametrization of the negative Binomial Distribution
 
-It is difficult to reproduce Figure 2(d), Szenario 17.
+It is difficult to reproduce Figure 2(d), Szenario 17 in Noufaily 2012. This might be because of how the negative binomial distribution is parametrized. Details are in German below. Different parametrizations are available as function argument `parametrization` in the function`simulate_negbin_ts`.
 
 Ich vermute, dass das daran liegt, dass die Parametrisierung der NegBinom-Verteiliung im Paper falsch ist. Dort ist mu der Erwartungswert und die Varianz ist ist gegeben durch mu\*sigma, wobei sigma ein Dispersion Parameter ist. Normalerweise wird der Dispersionsparameter aber k genannt und die Varianz ist mu+mu^2/k (siehe z.B. die Hilfe für rnbinom in R). Ich vermute, dass das im Paper mit der quasi-Poissonverteilung verwechselt wurde. Siehe z.B. hier für eine passende Parametrisierung: <https://en.wikipedia.org/wiki/Poisson_regression#Overdispersion_and_zero_inflation>
 

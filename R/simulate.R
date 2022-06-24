@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 
 
-simulate_negbin_ts <- function(length_ts = 624, theta, beta, gamma_1, gamma_2, sigma, m){
+simulate_negbin_ts <- function(length_ts = 624, theta, beta, gamma_1, gamma_2, sigma, m, parametrization = "simple"){
   # Simulate a time series from a negative binomial distribution.
   # See Noufaily 2013 for details
   t <- 1:length_ts
@@ -12,8 +12,13 @@ simulate_negbin_ts <- function(length_ts = 624, theta, beta, gamma_1, gamma_2, s
       gamma_1*cos(2*pi*j*t/52) + gamma_2*sin(2*pi*j*t/52)
   }
   mean <- exp(theta + beta*t + seasonality)
-  overdispersion <- sigma
-  # overdispersion <- mean/(sigma-1+0.0001)
+  
+  if(parametrization == "simple"){
+    overdispersion <- sigma
+  } else if(parametrization == "alternate"){
+    overdispersion <- mean/(sigma-1+0.0001)
+  }
+  
   ts <- tibble(t,mean) %>%
     rowwise() %>%
     mutate(
