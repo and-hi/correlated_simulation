@@ -26,7 +26,7 @@ Ich weiß nicht, wie man in R von der quasi-Poisson Verteilung zieht und habe nu
 
 ### Possible ways to continue
 
--   make the multivariate outbreaks depend on the variance of the endemic time series, as is the case for univariate time series
+-   make the multivariate outbreaks depend on the variance of the endemic time series, as is the case for univariate time series. In the univariate case `sd_ti <- mean_ti+mean_ti^2/sigma` in function `add_outbreaks_to_ts`calculates the variance of the underlying endemic time series und uses this to simulate an outbreak. We then only need a factor `k` to scale this variance. This is elegant because we don't need to specify outbreak sizes exactly, instead they scale with the endemic time series. See also section 3.2 of the paper.
 
 -   include polymod adjacency matrix for age group interactions
 
